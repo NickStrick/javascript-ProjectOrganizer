@@ -1,0 +1,30 @@
+{
+  "name": "javascript-ProjectOrganizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickStrick/javascript-ProjectOrganizer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickStrick/javascript-ProjectOrganizer/issues"
+  },
+  "homepage": "https://github.com/NickStrick/javascript-ProjectOrganizer#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.0",
+    "helmet": "^3.18.0",
+    "knex": "^0.16.5",
+    "sqlite3": "^4.0.8"
+  }
+}
