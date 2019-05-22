@@ -8,7 +8,7 @@ const ware = require('../middleware.js');
 
 router.route('/')
     .get(get)
-    // .post(add)
+    .post(add)
     ;
 
 router.route('/:id')
@@ -73,4 +73,21 @@ function remove(req, res) {
         .catch(err => {
             res.status(400).json({ err, msg: "failed to get projects array" })
         })
+}
+
+function add(req, res) {
+    const info = req.body;
+    if (info.name) {
+        db.add(req.body)
+            .then(result => {
+                console.log(result.id)
+                db.get()
+                    .then(project => {
+                        express.status(201).json(project);
+                    })
+                    .catch(err => res.status(401).json({ err, msg: 'cannot find project' }));
+            }).catch(err => res.status(405).json({ msg: 'name must be unique', err }));
+    } else {
+        res.status(422).json('Must include name, address, and requested_funds');
+    }
 }
