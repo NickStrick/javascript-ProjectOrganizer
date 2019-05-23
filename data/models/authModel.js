@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function get(id) {
-    let query = db('users').select('id', 'username', 'first_name', 'last_name', 'email', 'user_type', 'donated');
+    let query = db('users').select('id', 'username', 'password');
 
     if (id) {
         return query
@@ -29,11 +29,12 @@ function login(username) {
 
 function add(user) {
     user = { ...user }
-
+    console.log(user)
     return db('users')
         .insert(user);
 }
 
 function remove(id) {
-    return null;
+    return db('users')
+        .delete(id);
 }
