@@ -1,18 +1,33 @@
-// Update with your config settings.
+require('dotenv').config();
+
+const localPG = db => ({
+  host: process.env.HOST,
+  database: db,
+  user: process.env.USER,
+  password: process.env.PASS || ''
+});
+
+const pgTest = localPG(process.env.DB_TEST);
+const pgDev = localPG(process.env.DB_DEV);
+
+const dbSettings = (connection) => ({
+  client: 'pg',
+  connection,
+  pool: {
+    min: 2,
+    max: 10
+  },
+  useNullAsDefault: true,
+  migrations: {
+    directory: './data/migrations'
+  },
+  seeds: {
+    directory: `./data/seeds`
+  }
+});
 
 module.exports = {
-
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './data/project-organizer.db3',
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: {
-      directory: './data/seeds',
-    },
-  },
+  testing: dbSettings(pgTest),
+  development: dbSettings(pgDev),
+  production: dbSettings(process.env.DATABASE_URL)
 };
